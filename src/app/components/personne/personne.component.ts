@@ -9,14 +9,26 @@ import { PersonneService } from 'src/app/services/personne.service';
 })
 export class PersonneComponent implements OnInit {
 
+  personne: Personne = {};
   personnes: Array<Personne> = [];
   constructor(private ps: PersonneService) { }
 
 
   ngOnInit(): void {
-    this.ps.getAllPersons().subscribe(res => {
-      this.personnes = res;
-    })
+   this.initPersonne()
   }
 
+  addPerson() {
+    this.ps.addPerson(this.personne).subscribe(res => {
+      this.initPersonne();
+      this.personne = {};
+    })
+ }
+
+ initPersonne() {
+  this.ps.getAllPersons().subscribe(res => {
+    this.personnes = res;
+    console.log(this.personnes)
+  })
+}
 }

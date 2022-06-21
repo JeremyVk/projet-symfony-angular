@@ -11,4 +11,8 @@ export class PersonneService {
   getAllPersons() {
     return this.http.get<Array<Personne>>(this.url);
   }
+
+  addPerson(p: Personne) {
+    return this.http.post<Personne>(this.url, p)
+  }
 }
